@@ -56,6 +56,7 @@
             <form id="registrationForm" class="p-6 md:p-10 space-y-8" 
                   action="https://docs.google.com/forms/d/e/1FAIpQLSdDIUs-C8-ua41TGuizXR8-80E-4Mnz57-JXctBuvfQsW3E6g/formResponse"
                   method="POST"
+                  target="_blank" <!-- IMPORTANT: This opens the Google confirmation in a new tab -->
                   novalidate>
 
                 <!-- Section: Pilihan Daftar -->
@@ -249,7 +250,7 @@
             <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
                 <svg class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
             </div>
-            <h3 class="text-2xl font-semibold text-gray-900">Alhamdulillah, Pendaftaran Berhasil!</h3>
+            <h3 class="text-2xl font-semibold text-gray-900">Alhamdulillah, Pendaftaran Terkirim!</h3>
             <p class="text-gray-600 mt-2 leading-relaxed">Alhamdulillah Jaza Kumullohu Khoiro sudah mendaftar, kami akan segera memproses formulir anda. Semoga Allah paring Aman, Selamat, Lancar, dan Barokah.</p>
             <button id="closeModal" class="mt-6 w-full bg-emerald-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-emerald-700 transition duration-300">Tutup</button>
         </div>
@@ -277,56 +278,38 @@
             const spinner = submitButton.querySelector('.spinner');
             const modal = document.getElementById('successModal');
             const closeModalBtn = document.getElementById('closeModal');
+            let submitted = false;
             
             // Handle form submission
             form.addEventListener('submit', function(event) {
-                event.preventDefault(); 
                 if (!form.checkValidity()) {
-                    // Trigger browser's native validation UI
-                    const tmpSubmit = document.createElement('button');
-                    form.appendChild(tmpSubmit);
-                    tmpSubmit.click();
-                    form.removeChild(tmpSubmit);
+                    // Let the browser handle validation display
                     return;
                 }
                 
-                // Show loading state
+                // If form is valid, show loading state and set submitted flag
                 btnText.classList.add('hidden');
                 spinner.classList.remove('hidden');
                 submitButton.disabled = true;
+                submitted = true;
 
-                const formData = new FormData(form);
-
-                fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    mode: 'no-cors' // IMPORTANT: This is required for submitting to Google Forms from a different domain.
-                })
-                .then(() => {
-                    // This block will be executed after the request is sent.
-                    // We can't read the response due to 'no-cors', but we assume success if no network error occurred.
-                    modal.classList.remove('opacity-0', 'pointer-events-none');
-                    modal.querySelector('.transform').classList.remove('scale-95');
-                    modal.querySelector('.transform').classList.add('scale-100');
-                })
-                .catch(error => {
-                    console.error('Error submitting form:', error);
-                    // Optionally, show an error message to the user
-                    alert('Terjadi kesalahan saat mengirim formulir. Silakan coba lagi.');
-                })
-                .finally(() => {
-                    // Always reset the button state
-                    btnText.classList.remove('hidden');
-                    spinner.classList.add('hidden');
-                    submitButton.disabled = false;
-                });
+                // Show the success modal right away on our site
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.querySelector('.transform').classList.remove('scale-95');
+                modal.querySelector('.transform').classList.add('scale-100');
             });
 
             const closeModal = () => {
                 modal.classList.add('opacity-0', 'pointer-events-none');
                 modal.querySelector('.transform').classList.add('scale-95');
                 modal.querySelector('.transform').classList.remove('scale-100');
+                
+                // Reset button and form only after modal is closed
+                btnText.classList.remove('hidden');
+                spinner.classList.add('hidden');
+                submitButton.disabled = false;
                 form.reset();
+                submitted = false;
             };
             closeModalBtn.addEventListener('click', closeModal);
         });
