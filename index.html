@@ -55,7 +55,9 @@
             <!-- Form Section -->
             <form id="registrationForm" class="p-6 md:p-10 space-y-8" 
                   action="https://docs.google.com/forms/d/e/1FAIpQLSdDIUs-C8-ua41TGuizXR8-80E-4Mnz57-JXctBuvfQsW3E6g/formResponse"
-                  method="POST" novalidate>
+                  method="POST"
+                  target="hidden_iframe"
+                  novalidate>
 
                 <!-- Section: Pilihan Daftar -->
                 <fieldset class="space-y-6">
@@ -253,6 +255,9 @@
             <button id="closeModal" class="mt-6 w-full bg-emerald-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-emerald-700 transition duration-300">Tutup</button>
         </div>
     </div>
+    
+    <!-- Hidden iframe for submission -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -276,11 +281,15 @@
             const spinner = submitButton.querySelector('.spinner');
             const modal = document.getElementById('successModal');
             const closeModalBtn = document.getElementById('closeModal');
+            const hiddenIframe = document.getElementById('hidden_iframe');
+            let submitted = false;
             
-            // Handle form submission
-            form.addEventListener('submit', function(event) {
-                event.preventDefault(); 
+            form.addEventListener('submit', function(e) {
+                // We don't prevent default, we let the form submit to the iframe
+                // But first, we check validity
                 if (!form.checkValidity()) {
+                    // If invalid, stop the submission to show browser validation messages
+                    e.preventDefault();
                     // Trigger browser's native validation UI
                     const tmpSubmit = document.createElement('button');
                     form.appendChild(tmpSubmit);
@@ -288,48 +297,38 @@
                     form.removeChild(tmpSubmit);
                     return;
                 }
-                
-                // Show loading state
+
+                // If valid, show loading state
                 btnText.classList.add('hidden');
                 spinner.classList.remove('hidden');
                 submitButton.disabled = true;
+                submitted = true;
+            });
 
-                const formData = new FormData(form);
-
-                fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    mode: 'no-cors' // IMPORTANT: This is required for submitting to Google Forms from a different domain.
-                })
-                .then(() => {
-                    // This block will be executed after the request is sent.
-                    // We can't read the response due to 'no-cors', but we assume success if no network error occurred.
+            hiddenIframe.addEventListener('load', function () {
+                if (submitted) {
+                    // Show the success modal
                     modal.classList.remove('opacity-0', 'pointer-events-none');
                     modal.querySelector('.transform').classList.remove('scale-95');
                     modal.querySelector('.transform').classList.add('scale-100');
-                })
-                .catch(error => {
-                    console.error('Error submitting form:', error);
-                    // Optionally, show an error message to the user
-                    alert('Terjadi kesalahan saat mengirim formulir. Silakan coba lagi.');
-                })
-                .finally(() => {
-                    // Always reset the button state
-                    btnText.classList.remove('hidden');
-                    spinner.classList.add('hidden');
-                    submitButton.disabled = false;
-                });
+                }
             });
 
             const closeModal = () => {
                 modal.classList.add('opacity-0', 'pointer-events-none');
                 modal.querySelector('.transform').classList.add('scale-95');
                 modal.querySelector('.transform').classList.remove('scale-100');
+                
+                // Reset button and form only after modal is closed
+                btnText.classList.remove('hidden');
+                spinner.classList.add('hidden');
+                submitButton.disabled = false;
                 form.reset();
+                submitted = false;
             };
             closeModalBtn.addEventListener('click', closeModal);
         });
     </script>
 
 </body>
-</ht
+</html>
