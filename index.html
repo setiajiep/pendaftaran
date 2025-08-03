@@ -53,11 +53,20 @@
                   action="https://docs.google.com/forms/d/e/1FAIpQLSdDIUs-C8-ua41TGuizXR8-80E-4Mnz57-JXctBuvfQsW3E6g/formResponse"
                   method="POST">
 
-                <!-- Section: Pilihan Daftar -->
+                <!-- Section: Pilihan Pendaftaran -->
                 <fieldset class="space-y-6">
-                    <legend class="text-xl font-semibold text-emerald-700 border-b-2 border-emerald-200 pb-2 mb-6 w-full">
-                        Pilihan Pendaftaran
-                    </legend>
+                    <!-- Asrama yang akan diikuti -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Asrama Yang Akan Diikuti <span class="text-red-500">*</span></label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-2">
+                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Bukhori" class="form-radio" required><span class="ml-2">Bukhori</span></label>
+                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Muslim" class="form-radio" required><span class="ml-2">Muslim</span></label>
+                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Abu Daud" class="form-radio" required><span class="ml-2">Abu Daud</span></label>
+                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Tirmidzi" class="form-radio" required><span class="ml-2">Tirmidzi</span></label>
+                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Nasa'i" class="form-radio" required><span class="ml-2">Nasa'i</span></label>
+                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Ibnu Majah" class="form-radio" required><span class="ml-2">Ibnu Majah</span></label>
+                        </div>
+                    </div>
                     <!-- Tahun Ajaran -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Tahun <span class="text-red-500">*</span></label>
@@ -175,17 +184,6 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Status Mondok <span class="text-red-500">*</span></label>
                         <div class="flex items-center space-x-6"><label class="flex items-center"><input type="radio" name="entry.1502849043" value="Person" class="form-radio" required><span class="ml-2">Person</span></label><label class="flex items-center"><input type="radio" name="entry.1502849043" value="CKM" class="form-radio" required><span class="ml-2">CKM</span></label></div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Asrama Yang Akan Diikuti <span class="text-red-500">*</span></label>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-2">
-                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Bukhori" class="form-radio" required><span class="ml-2">Bukhori</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Muslim" class="form-radio" required><span class="ml-2">Muslim</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Abu Daud" class="form-radio" required><span class="ml-2">Abu Daud</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Tirmidzi" class="form-radio" required><span class="ml-2">Tirmidzi</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Nasa'i" class="form-radio" required><span class="ml-2">Nasa'i</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Ibnu Majah" class="form-radio" required><span class="ml-2">Ibnu Majah</span></label>
-                        </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
