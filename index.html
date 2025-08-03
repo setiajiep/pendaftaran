@@ -53,11 +53,7 @@
             </div>
 
             <!-- Form Section -->
-            <form id="registrationForm" class="p-6 md:p-10 space-y-8" 
-                  action="https://docs.google.com/forms/d/e/1FAIpQLSdDIUs-C8-ua41TGuizXR8-80E-4Mnz57-JXctBuvfQsW3E6g/formResponse"
-                  method="POST"
-                  target="hidden_iframe"
-                  novalidate>
+            <form id="registrationForm" class="p-6 md:p-10 space-y-8" novalidate>
 
                 <!-- Section: Pilihan Daftar -->
                 <fieldset class="space-y-6">
@@ -255,9 +251,6 @@
             <button id="closeModal" class="mt-6 w-full bg-emerald-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-emerald-700 transition duration-300">Tutup</button>
         </div>
     </div>
-    
-    <!-- Hidden iframe for submission -->
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -281,15 +274,13 @@
             const spinner = submitButton.querySelector('.spinner');
             const modal = document.getElementById('successModal');
             const closeModalBtn = document.getElementById('closeModal');
-            const hiddenIframe = document.getElementById('hidden_iframe');
-            let submitted = false;
             
+            // The URL of your Google Apps Script Web App
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzM95yaWFgxdCbVrKAcntxcqMWyAAViXmVxQZW5O7oUyR3f720W1lqgUUWxsWZthgEO/exec';
+
             form.addEventListener('submit', function(e) {
-                // We don't prevent default, we let the form submit to the iframe
-                // But first, we check validity
+                e.preventDefault(); 
                 if (!form.checkValidity()) {
-                    // If invalid, stop the submission to show browser validation messages
-                    e.preventDefault();
                     // Trigger browser's native validation UI
                     const tmpSubmit = document.createElement('button');
                     form.appendChild(tmpSubmit);
@@ -297,34 +288,39 @@
                     form.removeChild(tmpSubmit);
                     return;
                 }
-
-                // If valid, show loading state
+                
+                // Show loading state
                 btnText.classList.add('hidden');
                 spinner.classList.remove('hidden');
                 submitButton.disabled = true;
-                submitted = true;
-            });
 
-            hiddenIframe.addEventListener('load', function () {
-                if (submitted) {
-                    // Show the success modal
-                    modal.classList.remove('opacity-0', 'pointer-events-none');
-                    modal.querySelector('.transform').classList.remove('scale-95');
-                    modal.querySelector('.transform').classList.add('scale-100');
-                }
+                const formData = new FormData(form);
+
+                fetch(scriptURL, { method: 'POST', body: formData})
+                    .then(response => {
+                        console.log('Success!', response);
+                        // Show the success modal
+                        modal.classList.remove('opacity-0', 'pointer-events-none');
+                        modal.querySelector('.transform').classList.remove('scale-95');
+                        modal.querySelector('.transform').classList.add('scale-100');
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        alert('Terjadi kesalahan saat mengirim formulir. Silakan coba lagi.');
+                    })
+                    .finally(() => {
+                        // Always reset the button state
+                        btnText.classList.remove('hidden');
+                        spinner.classList.add('hidden');
+                        submitButton.disabled = false;
+                    });
             });
 
             const closeModal = () => {
                 modal.classList.add('opacity-0', 'pointer-events-none');
                 modal.querySelector('.transform').classList.add('scale-95');
                 modal.querySelector('.transform').classList.remove('scale-100');
-                
-                // Reset button and form only after modal is closed
-                btnText.classList.remove('hidden');
-                spinner.classList.add('hidden');
-                submitButton.disabled = false;
                 form.reset();
-                submitted = false;
             };
             closeModalBtn.addEventListener('click', closeModal);
         });
