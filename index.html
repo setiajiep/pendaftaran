@@ -41,6 +41,9 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        .modal-backdrop {
+            transition: opacity 0.3s ease;
+        }
     </style>
 </head>
 <body class="antialiased text-gray-700">
@@ -56,9 +59,7 @@
             </div>
 
             <!-- Form Section -->
-            <form id="registrationForm" class="p-6 md:p-10 space-y-8" 
-                  action="https://docs.google.com/forms/d/e/1FAIpQLSdDIUs-C8-ua41TGuizXR8-80E-4Mnz57-JXctBuvfQsW3E6g/formResponse"
-                  method="POST">
+            <form id="registrationForm" class="p-6 md:p-10 space-y-8" novalidate>
 
                 <!-- Important Information Section -->
                 <div class="bg-emerald-50 border-l-4 border-emerald-500 p-5 rounded-r-lg">
@@ -91,21 +92,21 @@
                     <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
                         <label class="block text-base font-medium text-gray-800 mb-3">Asrama Yang Akan Diikuti <span class="text-red-500">*</span></label>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3">
-                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Bukhori" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Bukhori</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Muslim" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Muslim</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Abu Daud" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Abu Daud</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Tirmidzi" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Tirmidzi</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Nasa'i" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Nasa'i</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.1302960530" value="Ibnu Majah" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Ibnu Majah</span></label>
+                            <label class="flex items-center"><input type="radio" name="Asrama Yang Akan Diikuti" value="Bukhori" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Bukhori</span></label>
+                            <label class="flex items-center"><input type="radio" name="Asrama Yang Akan Diikuti" value="Muslim" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Muslim</span></label>
+                            <label class="flex items-center"><input type="radio" name="Asrama Yang Akan Diikuti" value="Abu Daud" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Abu Daud</span></label>
+                            <label class="flex items-center"><input type="radio" name="Asrama Yang Akan Diikuti" value="Tirmidzi" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Tirmidzi</span></label>
+                            <label class="flex items-center"><input type="radio" name="Asrama Yang Akan Diikuti" value="Nasa'i" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Nasa'i</span></label>
+                            <label class="flex items-center"><input type="radio" name="Asrama Yang Akan Diikuti" value="Ibnu Majah" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Ibnu Majah</span></label>
                         </div>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
                         <label class="block text-base font-medium text-gray-800 mb-3">Tahun <span class="text-red-500">*</span></label>
                         <div class="flex flex-wrap gap-x-6 gap-y-3">
-                            <label class="flex items-center"><input type="radio" name="entry.417128301" value="2025" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">2025</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.417128301" value="2026" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">2026</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.417128301" value="2027" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">2027</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.417128301" value="2028" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">2028</span></label>
+                            <label class="flex items-center"><input type="radio" name="Tahun" value="2025" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">2025</span></label>
+                            <label class="flex items-center"><input type="radio" name="Tahun" value="2026" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">2026</span></label>
+                            <label class="flex items-center"><input type="radio" name="Tahun" value="2027" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">2027</span></label>
+                            <label class="flex items-center"><input type="radio" name="Tahun" value="2028" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">2028</span></label>
                         </div>
                     </div>
                 </fieldset>
@@ -117,30 +118,30 @@
                         Data Diri Calon Santri
                     </legend>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="no_nik" class="block text-sm font-medium text-gray-700 mb-1">No NIK <span class="text-red-500">*</span></label><input type="text" id="no_nik" name="entry.119305544" class="form-input w-full" required></div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="no_kk" class="block text-sm font-medium text-gray-700 mb-1">No KK <span class="text-red-500">*</span></label><input type="text" id="no_kk" name="entry.950377398" class="form-input w-full" required></div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="nama_lengkap" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap <span class="text-red-500">*</span></label><input type="text" id="nama_lengkap" name="entry.1572069726" class="form-input w-full" required></div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="nama_panggilan" class="block text-sm font-medium text-gray-700 mb-1">Nama Panggilan <span class="text-red-500">*</span></label><input type="text" id="nama_panggilan" name="entry.343219010" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="no_nik" class="block text-sm font-medium text-gray-700 mb-1">No NIK <span class="text-red-500">*</span></label><input type="text" id="no_nik" name="No NIK" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="no_kk" class="block text-sm font-medium text-gray-700 mb-1">No KK <span class="text-red-500">*</span></label><input type="text" id="no_kk" name="No KK" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="nama_lengkap" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap <span class="text-red-500">*</span></label><input type="text" id="nama_lengkap" name="Nama Lengkap" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="nama_panggilan" class="block text-sm font-medium text-gray-700 mb-1">Nama Panggilan <span class="text-red-500">*</span></label><input type="text" id="nama_panggilan" name="Nama Panggilan" class="form-input w-full" required></div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
                             <label class="block text-sm font-medium text-gray-700 mb-3">Jenis Kelamin <span class="text-red-500">*</span></label>
-                            <div class="flex items-center space-x-6"><label class="flex items-center"><input type="radio" name="entry.1165511045" value="Laki-Laki" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Laki-laki</span></label><label class="flex items-center"><input type="radio" name="entry.1165511045" value="Perempuan" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Perempuan</span></label></div>
+                            <div class="flex items-center space-x-6"><label class="flex items-center"><input type="radio" name="Jenis Kelamin" value="Laki-Laki" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Laki-laki</span></label><label class="flex items-center"><input type="radio" name="Jenis Kelamin" value="Perempuan" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Perempuan</span></label></div>
                         </div>
                         <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
                             <label class="block text-sm font-medium text-gray-700 mb-3">Status Menikah <span class="text-red-500">*</span></label>
-                            <div class="flex items-center space-x-6"><label class="flex items-center"><input type="radio" name="entry.302357672" value="Menikah" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Menikah</span></label><label class="flex items-center"><input type="radio" name="entry.302357672" value="Belum Menikah" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Belum Menikah</span></label></div>
+                            <div class="flex items-center space-x-6"><label class="flex items-center"><input type="radio" name="Status Menikah" value="Menikah" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Menikah</span></label><label class="flex items-center"><input type="radio" name="Status Menikah" value="Belum Menikah" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Belum Menikah</span></label></div>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="tempat_lahir" class="block text-sm font-medium text-gray-700 mb-1">Tempat Lahir <span class="text-red-500">*</span></label><input type="text" id="tempat_lahir" name="entry.314456221" class="form-input w-full" required></div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="tanggal_lahir" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Lahir <span class="text-red-500">*</span></label><input type="date" id="tanggal_lahir" name="entry.1197418533" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="tempat_lahir" class="block text-sm font-medium text-gray-700 mb-1">Tempat Lahir <span class="text-red-500">*</span></label><input type="text" id="tempat_lahir" name="Tempat Lahir" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="tanggal_lahir" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Lahir <span class="text-red-500">*</span></label><input type="date" id="tanggal_lahir" name="Tanggal Lahir" class="form-input w-full" required></div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="anak_ke" class="block text-sm font-medium text-gray-700 mb-1">Anak Ke- <span class="text-red-500">*</span></label><input type="number" id="anak_ke" name="entry.641276491" min="1" class="form-input w-full" required></div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="jumlah_saudara" class="block text-sm font-medium text-gray-700 mb-1">Dari Berapa Bersaudara <span class="text-red-500">*</span></label><input type="number" id="jumlah_saudara" name="entry.96841604" min="0" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="anak_ke" class="block text-sm font-medium text-gray-700 mb-1">Anak Ke <span class="text-red-500">*</span></label><input type="number" id="anak_ke" name="Anak Ke" min="1" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="jumlah_saudara" class="block text-sm font-medium text-gray-700 mb-1">Dari Berapa Bersaudara <span class="text-red-500">*</span></label><input type="number" id="jumlah_saudara" name="Dari Berapa Bersaudara" min="0" class="form-input w-full" required></div>
                     </div>
-                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="alamat" class="block text-sm font-medium text-gray-700 mb-1">Alamat <span class="text-red-500">*</span></label><textarea id="alamat" name="entry.316292708" rows="3" class="form-textarea w-full" required></textarea></div>
+                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="alamat" class="block text-sm font-medium text-gray-700 mb-1">Alamat <span class="text-red-500">*</span></label><textarea id="alamat" name="Alamat" rows="3" class="form-textarea w-full" required></textarea></div>
                 </fieldset>
 
                 <!-- Section: Kesehatan & Fisik -->
@@ -150,22 +151,22 @@
                         Kesehatan & Fisik
                     </legend>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="tinggi_badan" class="block text-sm font-medium text-gray-700 mb-1">Tinggi Badan (dalam CM) <span class="text-red-500">*</span></label><input type="number" id="tinggi_badan" name="entry.952595578" class="form-input w-full" required></div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="berat_badan" class="block text-sm font-medium text-gray-700 mb-1">Berat Badan <span class="text-red-500">*</span></label><input type="number" id="berat_badan" name="entry.643020567" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="tinggi_badan" class="block text-sm font-medium text-gray-700 mb-1">Tinggi Badan (dalam CM) <span class="text-red-500">*</span></label><input type="number" id="tinggi_badan" name="Tinggi Badan (dalam CM)" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="berat_badan" class="block text-sm font-medium text-gray-700 mb-1">Berat Badan <span class="text-red-500">*</span></label><input type="number" id="berat_badan" name="Berat Badan" class="form-input w-full" required></div>
                     </div>
                      <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
                         <label class="block text-sm font-medium text-gray-700 mb-3">Golongan Darah <span class="text-red-500">*</span></label>
                         <div class="flex flex-wrap gap-x-6 gap-y-3">
-                            <label class="flex items-center"><input type="radio" name="entry.2127406465" value="A" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">A</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.2127406465" value="B" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">B</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.2127406465" value="AB" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">AB</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.2127406465" value="O" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">O</span></label>
-                            <label class="flex items-center"><input type="radio" name="entry.2127406465" value="Tidak Diketahui" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Tidak Diketahui</span></label>
+                            <label class="flex items-center"><input type="radio" name="Golongan Darah" value="A" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">A</span></label>
+                            <label class="flex items-center"><input type="radio" name="Golongan Darah" value="B" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">B</span></label>
+                            <label class="flex items-center"><input type="radio" name="Golongan Darah" value="AB" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">AB</span></label>
+                            <label class="flex items-center"><input type="radio" name="Golongan Darah" value="O" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">O</span></label>
+                            <label class="flex items-center"><input type="radio" name="Golongan Darah" value="Tidak Diketahui" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Tidak Diketahui</span></label>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="penyakit" class="block text-sm font-medium text-gray-700 mb-1">Penyakit Yang Pernah Diderita <span class="text-red-500">*</span></label><input type="text" id="penyakit" name="entry.409431230" class="form-input w-full" required></div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="alergi" class="block text-sm font-medium text-gray-700 mb-1">Alergi <span class="text-red-500">*</span></label><input type="text" id="alergi" name="entry.116109654" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="penyakit" class="block text-sm font-medium text-gray-700 mb-1">Penyakit Yang Pernah Diderita <span class="text-red-500">*</span></label><input type="text" id="penyakit" name="Penyakit Yang Pernah Diderita" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="alergi" class="block text-sm font-medium text-gray-700 mb-1">Alergi <span class="text-red-500">*</span></label><input type="text" id="alergi" name="Alergi" class="form-input w-full" required></div>
                     </div>
                 </fieldset>
 
@@ -176,10 +177,10 @@
                         Data Orang Tua / Wali
                     </legend>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="nama_ayah" class="block text-sm font-medium text-gray-700 mb-1">Nama Ayah Kandung <span class="text-red-500">*</span></label><input type="text" id="nama_ayah" name="entry.720798962" class="form-input w-full" required></div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="nama_ibu" class="block text-sm font-medium text-gray-700 mb-1">Nama Ibu Kandung <span class="text-red-500">*</span></label><input type="text" id="nama_ibu" name="entry.984137314" class="form-input w-full" required></div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="nomor_hp" class="block text-sm font-medium text-gray-700 mb-1">Nomor HP <span class="text-red-500">*</span></label><input type="tel" id="nomor_hp" name="entry.1643461163" class="form-input w-full" placeholder="08xxxxxxxxxx" required></div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-red-500">*</span></label><input type="email" id="email" name="entry.1424207625" class="form-input w-full" placeholder="contoh@email.com" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="nama_ayah" class="block text-sm font-medium text-gray-700 mb-1">Nama Ayah Kandung <span class="text-red-500">*</span></label><input type="text" id="nama_ayah" name="Nama Ayah Kandung" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="nama_ibu" class="block text-sm font-medium text-gray-700 mb-1">Nama Ibu Kandung <span class="text-red-500">*</span></label><input type="text" id="nama_ibu" name="Nama Ibu Kandung" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="nomor_hp" class="block text-sm font-medium text-gray-700 mb-1">Nomor HP <span class="text-red-500">*</span></label><input type="tel" id="nomor_hp" name="Nomor HP" class="form-input w-full" placeholder="08xxxxxxxxxx" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-red-500">*</span></label><input type="email" id="email" name="Email" class="form-input w-full" placeholder="contoh@email.com" required></div>
                     </div>
                 </fieldset>
 
@@ -189,122 +190,4 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                         Informasi Sambung
                     </legend>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="daerah_sambung" class="block text-sm font-medium text-gray-700 mb-1">Daerah Sambung <span class="text-red-500">*</span></label><input type="text" id="daerah_sambung" name="entry.656578611" class="form-input w-full" required></div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="desa_sambung" class="block text-sm font-medium text-gray-700 mb-1">Desa Sambung <span class="text-red-500">*</span></label><input type="text" id="desa_sambung" name="entry.1756705193" class="form-input w-full" required></div>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="kelompok_sambung" class="block text-sm font-medium text-gray-700 mb-1">Kelompok Sambung <span class="text-red-500">*</span></label><input type="text" id="kelompok_sambung" name="entry.159168516" class="form-input w-full" required></div>
-                </fieldset>
-
-                <!-- Section: Informasi Tambahan -->
-                <fieldset class="space-y-4">
-                    <legend class="flex items-center text-xl font-semibold text-gray-800 border-b-2 border-gray-100 pb-3 mb-4 w-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20" /></svg>
-                        Informasi Tambahan
-                    </legend>
-                     <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-                        <label class="block text-sm font-medium text-gray-700 mb-3">Pendidikan Terakhir <span class="text-red-500">*</span></label>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3">
-                           <label class="flex items-center"><input type="radio" name="entry.2010279290" value="SD" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">SD</span></label>
-                           <label class="flex items-center"><input type="radio" name="entry.2010279290" value="SMP" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">SMP</span></label>
-                           <label class="flex items-center"><input type="radio" name="entry.2010279290" value="SMA" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">SMA</span></label>
-                           <label class="flex items-center"><input type="radio" name="entry.2010279290" value="SMK" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">SMK</span></label>
-                           <label class="flex items-center"><input type="radio" name="entry.2010279290" value="D3" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">D3</span></label>
-                           <label class="flex items-center"><input type="radio" name="entry.2010279290" value="D4" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">D4</span></label>
-                           <label class="flex items-center"><input type="radio" name="entry.2010279290" value="S1" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">S1</span></label>
-                           <label class="flex items-center"><input type="radio" name="entry.2010279290" value="S2" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">S2</span></label>
-                           <label class="flex items-center"><input type="radio" name="entry.2010279290" value="S3" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">S3</span></label>
-                        </div>
-                    </div>
-                     <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="jurusan" class="block text-sm font-medium text-gray-700 mb-1">Jurusan <span class="text-red-500">*</span></label><input type="text" id="jurusan" name="entry.2076933046" class="form-input w-full" required></div>
-                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-                        <label class="block text-sm font-medium text-gray-700 mb-3">Status Mondok <span class="text-red-500">*</span></label>
-                        <div class="flex items-center space-x-6"><label class="flex items-center"><input type="radio" name="entry.1502849043" value="Person" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Person</span></label><label class="flex items-center"><input type="radio" name="entry.1502849043" value="CKM" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">CKM</span></label></div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-                            <label class="block text-sm font-medium text-gray-700 mb-3">Bahasa Makna <span class="text-red-500">*</span></label>
-                            <div class="flex flex-col space-y-3"><label class="flex items-center"><input type="radio" name="entry.1874389797" value="Indonesia" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Indonesia</span></label><label class="flex items-center"><input type="radio" name="entry.1874389797" value="Jawa" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Jawa</span></label><label class="flex items-center"><input type="radio" name="entry.1874389797" value="Indonesia Jawa" class="form-radio h-5 w-5 text-emerald-600 focus:ring-emerald-500" required><span class="ml-3 text-gray-700">Indonesia Jawa</span></label></div>
-                        </div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="bahasa_harian" class="block text-sm font-medium text-gray-700 mb-1">Bahasa Harian <span class="text-red-500">*</span></label><input type="text" id="bahasa_harian" name="entry.1245673293" class="form-input w-full" required></div>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-                        <label class="block text-sm font-medium text-gray-700 mb-3">Khatam Hadist Besar</label>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3">
-                            <label class="flex items-center"><input type="checkbox" name="entry.519781763" value="Bukhori" class="form-checkbox h-5 w-5 text-emerald-600 rounded focus:ring-emerald-500"><span class="ml-3 text-gray-700">Bukhori</span></label>
-                            <label class="flex items-center"><input type="checkbox" name="entry.519781763" value="Muslim" class="form-checkbox h-5 w-5 text-emerald-600 rounded focus:ring-emerald-500"><span class="ml-3 text-gray-700">Muslim</span></label>
-                            <label class="flex items-center"><input type="checkbox" name="entry.519781763" value="Abu Daud" class="form-checkbox h-5 w-5 text-emerald-600 rounded focus:ring-emerald-500"><span class="ml-3 text-gray-700">Abu Daud</span></label>
-                            <label class="flex items-center"><input type="checkbox" name="entry.519781763" value="Nasai" class="form-checkbox h-5 w-5 text-emerald-600 rounded focus:ring-emerald-500"><span class="ml-3 text-gray-700">Nasai</span></label>
-                            <label class="flex items-center"><input type="checkbox" name="entry.519781763" value="Tirmidzi" class="form-checkbox h-5 w-5 text-emerald-600 rounded focus:ring-emerald-500"><span class="ml-3 text-gray-700">Tirmidzi</span></label>
-                            <label class="flex items-center"><input type="checkbox" name="entry.519781763" value="Ibnu Majah" class="form-checkbox h-5 w-5 text-emerald-600 rounded focus:ring-emerald-500"><span class="ml-3 text-gray-700">Ibnu Majah</span></label>
-                        </div>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-                        <label class="block text-sm font-medium text-gray-700 mb-3">SIM Yang di Miliki <span class="text-red-500">*</span></label>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3">
-                            <label class="flex items-center"><input type="checkbox" name="entry.726526892" value="A" class="form-checkbox h-5 w-5 text-emerald-600 rounded focus:ring-emerald-500"><span class="ml-3 text-gray-700">A</span></label>
-                            <label class="flex items-center"><input type="checkbox" name="entry.726526892" value="B1" class="form-checkbox h-5 w-5 text-emerald-600 rounded focus:ring-emerald-500"><span class="ml-3 text-gray-700">B1</span></label>
-                            <label class="flex items-center"><input type="checkbox" name="entry.726526892" value="B2" class="form-checkbox h-5 w-5 text-emerald-600 rounded focus:ring-emerald-500"><span class="ml-3 text-gray-700">B2</span></label>
-                            <label class="flex items-center"><input type="checkbox" name="entry.726526892" value="C" class="form-checkbox h-5 w-5 text-emerald-600 rounded focus:ring-emerald-500"><span class="ml-3 text-gray-700">C</span></label>
-                            <label class="flex items-center"><input type="checkbox" name="entry.726526892" value="Belum Punya" class="form-checkbox h-5 w-5 text-emerald-600 rounded focus:ring-emerald-500"><span class="ml-3 text-gray-700">Belum Punya</span></label>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="keahlian" class="block text-sm font-medium text-gray-700 mb-1">Keahlian <span class="text-red-500">*</span></label><input type="text" id="keahlian" name="entry.42303366" class="form-input w-full" required></div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="hobi" class="block text-sm font-medium text-gray-700 mb-1">Hobi <span class="text-red-500">*</span></label><input type="text" id="hobi" name="entry.1366164885" class="form-input w-full" required></div>
-                    </div>
-                </fieldset>
-
-                <!-- Submit Button -->
-                <div class="pt-6">
-                    <button type="submit" id="submitButton" class="w-full group bg-emerald-600 text-white font-bold text-lg py-4 px-6 rounded-lg shadow-lg shadow-emerald-200/80 hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-300 transition-all duration-300 ease-in-out flex items-center justify-center hover:-translate-y-1">
-                        <span class="btn-text">Daftar Sekarang</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-3 transform transition-transform duration-300 group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                        <span class="spinner w-6 h-6 ml-3 rounded-full border-2 border-white hidden"></span>
-                    </button>
-                </div>
-
-            </form>
-        </div>
-        
-        <!-- Footer -->
-        <footer class="text-center mt-12">
-            <p class="text-gray-500">&copy; <span id="year"></span> PPHB Burhan Al-Bana Metro. All Rights Reserved.</p>
-        </footer>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add common classes to form elements for easier styling
-            document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="date"], textarea').forEach(el => {
-                el.classList.add('form-input', 'w-full', 'px-4', 'py-2.5', 'border', 'rounded-lg', 'focus:outline-none');
-            });
-
-            // Set current year in footer
-            document.getElementById('year').textContent = new Date().getFullYear();
-
-            const form = document.getElementById('registrationForm');
-            const submitButton = document.getElementById('submitButton');
-            const btnText = submitButton.querySelector('.btn-text');
-            const spinner = submitButton.querySelector('.spinner');
-            const btnIcon = submitButton.querySelector('svg');
-
-            form.addEventListener('submit', function(e) {
-                if (!form.checkValidity()) {
-                    // If the form is invalid, the browser will display the errors.
-                    // We don't need to do anything else.
-                    return;
-                }
-                
-                // Show loading state when the form is valid and about to submit
-                btnText.classList.add('hidden');
-                btnIcon.classList.add('hidden');
-                spinner.classList.remove('hidden');
-                submitButton.disabled = true;
-            });
-        });
-    </script>
-
-</body>
-</html>
-
+                 
