@@ -238,17 +238,7 @@
         </footer>
     </div>
     
-    <!-- Success Modal -->
-    <div id="successModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center p-4 modal-backdrop opacity-0 pointer-events-none">
-        <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center transform scale-95 transition-transform duration-300">
-            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
-                <svg class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-            </div>
-            <h3 class="text-2xl font-semibold text-gray-900">Alhamdulillah, Pendaftaran Terkirim!</h3>
-            <p class="text-gray-600 mt-2 leading-relaxed">Alhamdulillah Jaza Kumullohu Khoiro sudah mendaftar, kami akan segera memproses formulir anda. Semoga Allah paring Aman, Selamat, Lancar, dan Barokah.</p>
-            <button id="closeModal" class="mt-6 w-full bg-emerald-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-emerald-700 transition duration-300">Tutup</button>
-        </div>
-    </div>
+    <!-- We don't need the modal anymore with this method -->
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -270,57 +260,18 @@
             const submitButton = document.getElementById('submitButton');
             const btnText = submitButton.querySelector('.btn-text');
             const spinner = submitButton.querySelector('.spinner');
-            const modal = document.getElementById('successModal');
-            const closeModalBtn = document.getElementById('closeModal');
-            
-            // The URL of your Google Apps Script Web App
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbzM95yaWFgxdCbVrKAcntxcqMWyAAViXmVxQZW5O7oUyR3f720W1lqgUUWxsWZthgEO/exec';
 
             form.addEventListener('submit', function(e) {
-                e.preventDefault(); 
                 if (!form.checkValidity()) {
-                    // Trigger browser's native validation UI
-                    const tmpSubmit = document.createElement('button');
-                    form.appendChild(tmpSubmit);
-                    tmpSubmit.click();
-                    form.removeChild(tmpSubmit);
+                    // Let the browser handle validation display
                     return;
                 }
                 
-                // Show loading state
+                // Show loading state when the form is valid and about to submit
                 btnText.classList.add('hidden');
                 spinner.classList.remove('hidden');
                 submitButton.disabled = true;
-
-                const formData = new FormData(form);
-
-                fetch(scriptURL, { method: 'POST', body: formData})
-                    .then(response => {
-                        console.log('Success!', response);
-                        // Show the success modal
-                        modal.classList.remove('opacity-0', 'pointer-events-none');
-                        modal.querySelector('.transform').classList.remove('scale-95');
-                        modal.querySelector('.transform').classList.add('scale-100');
-                    })
-                    .catch(error => {
-                        console.error('Error!', error.message);
-                        alert('Terjadi kesalahan saat mengirim formulir. Silakan coba lagi.');
-                    })
-                    .finally(() => {
-                        // Always reset the button state
-                        btnText.classList.remove('hidden');
-                        spinner.classList.add('hidden');
-                        submitButton.disabled = false;
-                    });
             });
-
-            const closeModal = () => {
-                modal.classList.add('opacity-0', 'pointer-events-none');
-                modal.querySelector('.transform').classList.add('scale-95');
-                modal.querySelector('.transform').classList.remove('scale-100');
-                form.reset();
-            };
-            closeModalBtn.addEventListener('click', closeModal);
         });
     </script>
 
