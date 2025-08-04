@@ -306,10 +306,14 @@
             const btnIcon = submitButton.querySelector('svg');
             const modal = document.getElementById('successModal');
             const closeModalBtn = document.getElementById('closeModal');
+            
+            // The URL of your Google Apps Script Web App
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyfxjoCceSy1Lu-oRerpqBr22NDlhNCD6iRRTz9bexC8flvvkPcCXoh0kIDK8KDtNToYg/exec';
 
             form.addEventListener('submit', function(e) {
-                e.preventDefault();
+                e.preventDefault(); 
                 if (!form.checkValidity()) {
+                    // Trigger browser's native validation UI
                     const tmpSubmit = document.createElement('button');
                     form.appendChild(tmpSubmit);
                     tmpSubmit.click();
@@ -317,46 +321,40 @@
                     return;
                 }
                 
+                // Show loading state
                 btnText.classList.add('hidden');
                 btnIcon.classList.add('hidden');
                 spinner.classList.remove('hidden');
                 submitButton.disabled = true;
 
                 const formData = new FormData(form);
-                const formAction = "https://formspree.io/f/mrblaovy";
 
-                fetch(formAction, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
+                fetch(scriptURL, { method: 'POST', body: formData})
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Network response was not ok.');
+                        }
+                    })
+                    .then(data => {
+                        console.log('Success!', data);
+                        // Show the success modal
                         modal.classList.remove('opacity-0', 'pointer-events-none');
                         modal.querySelector('.transform').classList.remove('scale-95');
                         modal.querySelector('.transform').classList.add('scale-100');
-                    } else {
-                        response.json().then(data => {
-                            if (Object.hasOwn(data, 'errors')) {
-                                alert(data["errors"].map(error => error["message"]).join(", "));
-                            } else {
-                                alert('Terjadi kesalahan saat mengirim formulir. Silakan coba lagi.');
-                            }
-                        })
-                    }
-                })
-                .catch(error => {
-                    console.error('Error!', error.message);
-                    alert('Terjadi kesalahan jaringan. Periksa koneksi internet Anda dan coba lagi.');
-                })
-                .finally(() => {
-                    btnText.classList.remove('hidden');
-                    btnIcon.classList.remove('hidden');
-                    spinner.classList.add('hidden');
-                    submitButton.disabled = false;
-                });
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        alert('Terjadi kesalahan saat mengirim formulir. Silakan coba lagi.');
+                    })
+                    .finally(() => {
+                        // Always reset the button state
+                        btnText.classList.remove('hidden');
+                        btnIcon.classList.remove('hidden');
+                        spinner.classList.add('hidden');
+                        submitButton.disabled = false;
+                    });
             });
 
             const closeModal = () => {
@@ -371,4 +369,3 @@
 
 </body>
 </html>
-
