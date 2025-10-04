@@ -39,7 +39,7 @@
             animation: spin 1s linear infinite;
         }
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to { transform: rotate(3 sweatshirts); }
         }
         .modal-backdrop {
             transition: opacity 0.3s ease;
@@ -119,8 +119,10 @@
                     </legend>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="no_nik" class="block text-sm font-medium text-gray-700 mb-1">No NIK <span class="text-red-500">*</span></label><input type="text" id="no_nik" name="No NIK" class="form-input w-full" required></div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="nama_lengkap" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap <span class="text-red-500">*</span></label><input type="text" id="nama_lengkap" name="Nama Lengkap" class="form-input w-full" required><p id="lookupStatus" class="text-sm text-gray-500 mt-2 h-4"></p></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="no_kk" class="block text-sm font-medium text-gray-700 mb-1">No KK <span class="text-red-500">*</span></label><input type="text" id="no_kk" name="No KK" class="form-input w-full" required></div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="nama_lengkap" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap <span class="text-red-500">*</span></label><input type="text" id="nama_lengkap" name="Nama Lengkap" class="form-input w-full" required></div>
                         <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm"><label for="nama_panggilan" class="block text-sm font-medium text-gray-700 mb-1">Nama Panggilan <span class="text-red-500">*</span></label><input type="text" id="nama_panggilan" name="Nama Panggilan" class="form-input w-full" required></div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -304,13 +306,108 @@
             const modal = document.getElementById('successModal');
             const closeModalBtn = document.getElementById('closeModal');
             
-            // The URL of your Google Apps Script Web App
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbyfxjoCceSy1Lu-oRerpqBr22NDlhNCD6iRRTz9bexC8flvvkPcCXoh0kIDK8KDtNToYg/exec';
+            // =========================================================================
+            // URL SUDAH DIPERBARUI SESUAI DENGAN LINK YANG KAMU BERIKAN
+            // =========================================================================
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbz7R20vOQ2rzXOtZaE-lCGY0Tbf8hbj7i2zlHw4Gyk17z1VybxPaLuB5YLf6YGgyBwdog/exec';
 
+            // --- [AWAL] KODE BARU UNTUK AUTO-FILL ---
+            
+            const nikInput = document.getElementById('no_nik');
+            const namaInput = document.getElementById('nama_lengkap');
+            const lookupStatus = document.getElementById('lookupStatus');
+
+            // Fungsi untuk mengambil data dari Google Sheet saat NIK & Nama diisi
+            async function fetchSantriData() {
+                const nik = nikInput.value.trim();
+                const nama = namaInput.value.trim();
+
+                // Hanya jalankan jika kedua field terisi
+                if (nik === '' || nama === '') {
+                    return;
+                }
+
+                lookupStatus.textContent = 'Mencari data...';
+                
+                // Buat URL pencarian dengan parameter NIK dan Nama
+                const lookupURL = `${scriptURL}?nik=${encodeURIComponent(nik)}&nama=${encodeURIComponent(nama)}`;
+
+                try {
+                    const response = await fetch(lookupURL);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const result = await response.json();
+
+                    if (result.status === 'success') {
+                        lookupStatus.textContent = 'Data ditemukan! Mengisi formulir...';
+                        populateForm(result.data);
+                        setTimeout(() => { lookupStatus.textContent = ''; }, 3000);
+                    } else if (result.status === 'not_found') {
+                        lookupStatus.textContent = 'Data baru, silakan lanjutkan mengisi.';
+                        setTimeout(() => { lookupStatus.textContent = ''; }, 3000);
+                    } else {
+                        throw new Error(result.message || 'Gagal mengambil data.');
+                    }
+                } catch (error) {
+                    console.error('Error saat mencari data:', error);
+                    lookupStatus.textContent = 'Gagal memeriksa data.';
+                    setTimeout(() => { lookupStatus.textContent = ''; }, 3000);
+                }
+            }
+
+            // Fungsi untuk mengisi otomatis semua field di form
+            function populateForm(data) {
+                // Jangan reset NIK dan Nama yang sudah diisi pengguna
+                const nikValue = nikInput.value;
+                const namaValue = namaInput.value;
+                form.reset();
+                nikInput.value = nikValue;
+                namaInput.value = namaValue;
+                
+                for (const key in data) {
+                    // Skip jika key adalah NIK atau Nama Lengkap, karena sudah ada
+                    if (key === "No NIK" || key === "Nama Lengkap") continue;
+
+                    const value = data[key];
+                    if (value === null || value === undefined) continue; // Lewati jika data kosong
+
+                    const elements = form.querySelectorAll(`[name="${key}"]`);
+                    
+                    if (elements.length > 0) {
+                        const elType = elements[0].type;
+
+                        if (elType === 'radio') {
+                            elements.forEach(radio => {
+                                if (radio.value == value) {
+                                    radio.checked = true;
+                                }
+                            });
+                        } else if (elType === 'checkbox') {
+                            // Asumsi data checkbox di GSheet dipisah koma (misal: "A, C")
+                            const values = String(value).split(',').map(v => v.trim());
+                            elements.forEach(checkbox => {
+                                if (values.includes(checkbox.value)) {
+                                    checkbox.checked = true;
+                                }
+                            });
+                        } else {
+                            // Untuk input text, date, textarea, number, dll.
+                            elements[0].value = value;
+                        }
+                    }
+                }
+            }
+
+            // Tambahkan event listener. 'blur' dijalankan saat kursor keluar dari input
+            nikInput.addEventListener('blur', fetchSantriData);
+            namaInput.addEventListener('blur', fetchSantriData);
+
+            // --- [AKHIR] KODE BARU UNTUK AUTO-FILL ---
+
+
+            // Event listener untuk mengirim form (kode yang sudah ada)
             form.addEventListener('submit', function(e) {
                 e.preventDefault(); 
                 if (!form.checkValidity()) {
-                    // Trigger browser's native validation UI
                     const tmpSubmit = document.createElement('button');
                     form.appendChild(tmpSubmit);
                     tmpSubmit.click();
@@ -318,7 +415,6 @@
                     return;
                 }
                 
-                // Show loading state
                 btnText.classList.add('hidden');
                 btnIcon.classList.add('hidden');
                 spinner.classList.remove('hidden');
@@ -331,22 +427,19 @@
                         if (response.ok) {
                             return response.json();
                         } else {
-                            throw new Error('Network response was not ok.');
+                           return response.text().then(text => { throw new Error('Network response was not ok. ' + text) });
                         }
                     })
                     .then(data => {
                         console.log('Success!', data);
-                        // Show the success modal
                         modal.classList.remove('opacity-0', 'pointer-events-none');
                         modal.querySelector('.transform').classList.remove('scale-95');
-                        modal.querySelector('.transform').classList.add('scale-100');
                     })
                     .catch(error => {
                         console.error('Error!', error.message);
                         alert('Terjadi kesalahan saat mengirim formulir. Silakan coba lagi.');
                     })
                     .finally(() => {
-                        // Always reset the button state
                         btnText.classList.remove('hidden');
                         btnIcon.classList.remove('hidden');
                         spinner.classList.add('hidden');
@@ -357,7 +450,6 @@
             const closeModal = () => {
                 modal.classList.add('opacity-0', 'pointer-events-none');
                 modal.querySelector('.transform').classList.add('scale-95');
-                modal.querySelector('.transform').classList.remove('scale-100');
                 form.reset();
             };
             closeModalBtn.addEventListener('click', closeModal);
@@ -366,3 +458,4 @@
 
 </body>
 </html>
+
